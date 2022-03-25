@@ -1,15 +1,15 @@
-_addon.name = 'BuffWatch'
+_addon.name = 'BuffWatcher'
 _addon.author = 'Callios/Sefadin'
 _addon.version = '0.02'
 _addon.command = 'bw'
-_addon.commands = {'bw', 'buffwatch',}
+_addon.commands = {'bw', 'buffwatcher',}
 
 require('pack')
 require('lists')
 require('tables')
 require('strings')
 texts = require('texts')
-config = require('config')
+--config = require('config')
 
 
 shihei = 0 
@@ -21,9 +21,11 @@ cocoonyn = "\\cs(255,127,0)No"
 -- local display_box = function()
 --     return 'BuffWatch \nPhalanx \nReprisal \nCrusade'
 -- end
+display_box_config = {pos={x=20,y=240},padding=8,text={font='sans-serif',size=10,stroke={width=2,alpha=255},Fonts={'sans-serif'},},bg={alpha=0},flags={}}
+display_jobbox = texts.new(display_box_config)
 
 display_box = function()
-    str = '           \\cs(130,130,130)BuffWatcher\\cr\n'
+    str = '        \\cs(130,130,130)BuffWatcher\\cr\n'
     str = str.."\\cs(255,255,255) Shihei(U): "..shihei.."\\cr\n"
     str = str..'Utsusemi Shadows: '..utsubuff.."\\cr\n"
     str = str..'Phalanx: '..phalanxyn.."\\cr\n"
@@ -32,13 +34,12 @@ display_box = function()
     return str
      end
 
-display_box_config = {pos={x=20,y=240},padding=8,text={font='sans-serif',size=10,stroke={width=2,alpha=255},Fonts={'sans-serif'},},bg={alpha=0},flags={}}
-    display_jobbox = texts.new(display_box_config)
+
     
      function user_setup()
          check_tool_count()
-         gearswap_jobbox:text(display_box())		
-         gearswap_jobbox:show()
+         display_jobbox:text(display_box())		
+         display_jobbox:show()
      end
     
     
@@ -118,8 +119,8 @@ display_box_config = {pos={x=20,y=240},padding=8,text={font='sans-serif',size=10
              cocoonyn ="\\cs(255,127,0)No"
         end
     
-         gearswap_jobbox:text(display_box())
-         gearswap_jobbox:show()
+         display_jobbox:text(display_box())
+         display_jobbox:show()
      end	
     --  function aftercast(spell, act, spellMap, eventArgs)
     --     check_tool_count()
